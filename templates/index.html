@@ -13,7 +13,16 @@
         <li>
           <strong>{{ r.name }}</strong><br>
           Cuisines: {{ r.cuisines }}<br>
-          Rating: {{ r.rating }}<br>
+          Rating: {{ r.rating }}
+          {% for i in range(1,6) %}
+            {%if i <= r.rating|float %}
+            ⭐
+          {% else %}
+            ☆
+          {% endif %}
+        {% endfor %}
+            
+            <br>
           Address: {{ r.address }}
         </li>
         <br>
