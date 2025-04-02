@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Just Eat Restaurant Finder</title>
+</head>
+<body>
+  <h1>Top 10 Restaurants in M16 0RA</h1>
+
+  {% if restaurants %}
+    <ul>
+      {% for r in restaurants %}
+        <li>
+          <strong>{{ r.name }}</strong><br>
+          Cuisines: {{ r.cuisines }}<br>
+          Rating: {{ r.rating }}<br>
+          Address: {{ r.address }}
+        </li>
+        <br>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No restaurants found.</p>
+  {% endif %}
+</body>
+</html>
