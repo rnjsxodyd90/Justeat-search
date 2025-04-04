@@ -19,9 +19,19 @@
       <div class="row">
         {% for r in restaurants %}
           <div class="col-md-6 mb-4">
-            <div class="card h-100 shadow-sm">
+            <div class="card h-100 shadow-sm position-relative">
+              {% if r.halal %}
+                <span class="badge bg-success position-absolute top-0 end-0 m-2">
+                  Halal {% if r.flag %}{{ r.flag }}{% endif %}
+                </span>
+              {% endif %}
               <div class="card-body">
-                <h5 class="card-title">{{ r.name }}</h5>
+                <h5 class="card-title">
+                  {{ r.name }}
+                  {% if r.flag %}
+                    <span class="ms-2">{{ r.flag }}</span>
+                  {% endif %}
+                </h5>
                 <p class="card-text">
                   <strong>Cuisines:</strong> {{ r.cuisines }}<br>
                   <strong>Rating:</strong>
