@@ -45,11 +45,10 @@ pip install -r requirements.txt
 
 ## Flask 
 
-python run.py and open your browser and visit 
-
+python run.py from the CLI/terminal 
 ## tkinter
 
-python gui_app.py
+python gui_app.py from the CLI/terminal
 
 if you want to import to exe file, pip install pyinstaller
 
