@@ -1,6 +1,4 @@
-# JusteatTW
-
-#  Restaurant Viewer Justeat (10 restaurants only for each search)
+# Restaurant Viewer Justeat (10 restaurants only for each search)
 
 This application allows users to explore restaurants in the UK using the Just Eat API.  
 It is available in **two versions**:
@@ -28,7 +26,7 @@ It is available in **two versions**:
 
 1. Clone the repository:
 
-git clone https://github.com/yourusername/justeat-viewer.git
+git clone https://github.com/rnjsxodyd90/justeatTW.git
 cd justeat-viewer
 
 
@@ -54,6 +52,7 @@ python run.py and open your browser and visit
 python gui_app.py
 
 if you want to import to exe file, pip install pyinstaller
+
 pyinstaller --onefile --noconsole gui_app.py
 
 
@@ -66,15 +65,15 @@ Halal classification is assumed true if the word "Halal" is present in the cuisi
 The flag used in the UI is based on the first matching national cuisine from a pre-defined list (Italian, Indian, etc.). I could add more nationalities to it as part of an improvement.
 
 
-# potential improvements
+# Potential improvements
 
-real-time search input in the Flask app (allow user to enter postcode) could be added like in the tkinter application
+Real-time search input in the Flask app (allow user to enter postcode) could be added like in the tkinter application
 
 From GUI, I could instantly resort results on dropdown change (without re-clicking Search button)
 
 More tags from the restaurant object could be added "Open Now" status and opening hours (from API) could be added
 
-I could Package both Flask and GUI into a single launcher for Windows/Mac
+Could Package both Flask and GUI into a single launcher for Windows/Mac
 
 
 
