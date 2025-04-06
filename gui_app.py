@@ -6,7 +6,7 @@ from app.utils import get_restaurants  # Reuse API fetch + processing logic
 class RestaurantBrowser:
     def __init__(self, root):
         self.root = root
-        self.root.title("Just Eat Restaurant Viewer")
+        self.root.title("Just Eat TW")
 
         # Input and UI state
         self.postcode = tk.StringVar(value="M160RA")            # default postcode
