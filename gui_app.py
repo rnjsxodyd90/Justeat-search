@@ -71,19 +71,19 @@ class RestaurantBrowser:
         elif option == "Delivery Cost (Low → High)":
             self.restaurants.sort(key=lambda r: r.get("delivery_cost", float('inf')))
 
-    # 🖼️ Render restaurant cards (3 at a time)
+    #  Render restaurant cards (3 at a time)
     def show_restaurants(self):
         for widget in self.result_frame.winfo_children():
             widget.destroy()  # 🔄 clear previous results
 
-        # 🪜 get current "page" of 3 results
+        #  get current page of 3 results
         sliced = self.restaurants[self.current_index:self.current_index + 3]
         if not sliced:
             ttk.Label(self.result_frame, text="No restaurants found.").pack()
             return
 
         for r in sliced:
-            # 📦 Create a card for each restaurant
+            #  Create a card for each restaurant
             card = ttk.LabelFrame(self.result_frame, text=r['name'], padding=10)
             card.pack(fill="x", expand=True, pady=5)
 

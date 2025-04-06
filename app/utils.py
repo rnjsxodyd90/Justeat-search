@@ -8,8 +8,7 @@ def get_restaurants(postcode):
         "Accept-Tenant": "uk",
         "Accept-Language": "en-GB",
         "Accept": "application/json",
-        "User-Agent": "JustEat-Client"
-    }
+        "User-Agent": "JustEat-Client"}
 
     try:
         response = requests.get(url, headers=headers)
@@ -34,7 +33,7 @@ def get_restaurants(postcode):
                 "Thai": "🇹🇭",
                 "Greek": "🇬🇷",
                 "Korean": "🇰🇷"
-            }
+                                }
 
             # Get first matched nationality (if any)
             national_cuisine = next((c for c in cuisine_names if c in nationality_flags), None)
