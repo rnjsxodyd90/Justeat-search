@@ -42,7 +42,9 @@ def get_restaurants(postcode):
 
             result.append({
                 "name": r.get("name", "N/A"),
-                "cuisines": ", ".join(cuisine_names),
+                "cuisines": cuisine_names,  #instead of combining cuisines to a single string, kept them as a list to have access individually in the html
+                "delivery_cost": r.get("deliveryCost", None),
+
                 "rating": r.get("rating", {}).get("starRating", "N/A"),
                 "address": r.get("address", {}).get("firstLine", "") + ", " + r.get("address", {}).get("postalCode", ""),
                 "halal": "Halal" in cuisine_names,

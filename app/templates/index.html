@@ -4,55 +4,122 @@
   <meta charset="UTF-8">
   <title>Just Eat Restaurant Finder</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ✅ Bootstrap CSS (for responsive grid, cards, buttons, carousel) -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
   <style>
+    /* ⭐ Star rating color */
     .star {
       color: gold;
     }
+
+    /* 📌 Sticky carousel nav buttons at the bottom of viewport */
+    .carousel-control-wrapper {
+      position: sticky;
+      bottom: 0;
+      background-color: white;
+      padding: 1rem 0;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      z-index: 100;
+      border-top: 1px solid #ddd;
+    }
   </style>
 </head>
+
 <body>
   <div class="container py-5">
-    <h1 class="mb-4 text-center">Top 10 Restaurants in M16 0RA</h1>
+    <!-- 🧭 Page heading -->
+    <h1 class="mb-4 text-center">Restaurants in postcode M160RA</h1>
 
     {% if restaurants %}
-      <div class="row">
-        {% for r in restaurants %}
-          <div class="col-md-6 mb-4">
-            <div class="card h-100 shadow-sm position-relative">
-              {% if r.halal %}
-                <span class="badge bg-success position-absolute top-0 end-0 m-2">
-                  Halal {% if r.flag %}{{ r.flag }}{% endif %}
-                </span>
-              {% endif %}
-              <div class="card-body">
-                <h5 class="card-title">
-                  {{ r.name }}
-                  {% if r.flag %}
-                    <span class="ms-2">{{ r.flag }}</span>
-                  {% endif %}
-                </h5>
-                <p class="card-text">
-                  <strong>Cuisines:</strong> {{ r.cuisines }}<br>
-                  <strong>Rating:</strong>
-                  {% for i in range(1, 6) %}
-                    {% if i <= r.rating|float %}
-                      <span class="star">⭐</span>
-                    {% else %}
-                      <span class="star">☆</span>
-                    {% endif %}
-                  {% endfor %}
-                  ({{ r.rating }})<br>
-                  <strong>Address:</strong> {{ r.address }}
-                </p>
+      <!-- groups restaurants into slides of 3 -->
+      <div id="restaurantCarousel" class="carousel slide" data-bs-ride="false">
+        <div class="carousel-inner">
+          {% for group in restaurants|batch(3, fill_with=None) %}
+            <div class="carousel-item {% if loop.first %}active{% endif %}">
+              <div class="row">
+                {% for r in group if r %}
+                  <div class="col-md-4">
+                    <!--  Individual restaurant card -->
+                    <div class="card h-100 shadow-sm position-relative m-2">
+
+                      <!--  Halal badge in top-right corner, with flag if available -->
+                      {% if r.halal %}
+                        <span class="badge bg-success position-absolute top-0 end-0 m-2">
+                          Halal {% if r.flag %}{{ r.flag }}{% endif %}
+                        </span>
+                      {% endif %}
+
+                      <div class="card-body">
+                        <!--  Restaurant name with flag (if any) -->
+                        <h5 class="card-title">
+                          {{ r.name }}
+                          {% if r.flag %}
+                            <span class="ms-2">{{ r.flag }}</span>
+                          {% endif %}
+                        </h5>
+
+                        <!-- 🍽️ Cuisine tags -->
+                        <p class="card-text">
+                          <strong>Cuisines:</strong>
+                          {% for cuisine in r.cuisines %}
+                            {% if cuisine == "Halal" %}
+                              <span class="badge bg-success me-1">{{ cuisine }}</span>
+                            {% elif cuisine in ["Italian", "Indian", "American", "Turkish", "Japanese", "Chinese", "Greek", "Mexican", "Thai", "Korean"] %}
+                              <span class="badge bg-primary me-1">{{ cuisine }}</span>
+                            {% elif cuisine in ["Collect stamps", "Low Delivery Fee", "Freebies", "Deals", "£8 off", "Local Legends"] %}
+                              <span class="badge bg-warning text-dark me-1">{{ cuisine }}</span>
+                            {% else %}
+                              <span class="badge bg-secondary me-1">{{ cuisine }}</span>
+                            {% endif %}
+                          {% endfor %}
+                          <br>
+
+                          <!--  Star rating -->
+                          <strong>Rating:</strong>
+                          {% for i in range(1, 6) %}
+                            {% if i <= r.rating|float %}
+                              <span class="star">⭐</span>
+                            {% else %}
+                              <span class="star">☆</span>
+                            {% endif %}
+                          {% endfor %}
+                          ({{ r.rating }})<br>
+
+                          <!-- 🏠 Address -->
+                          <strong>Address:</strong> {{ r.address }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
               </div>
             </div>
-          </div>
-        {% endfor %}
+          {% endfor %}
+        </div>
       </div>
+
+      <!-- Carousel navigation buttons (sticky at bottom) -->
+      <div class="carousel-control-wrapper">
+        <button class="btn btn-outline-primary" type="button" data-bs-target="#restaurantCarousel" data-bs-slide="prev">
+          ← Previous 3
+        </button>
+        <button class="btn btn-outline-primary" type="button" data-bs-target="#restaurantCarousel" data-bs-slide="next">
+          Next 3 →
+        </button>
+      </div>
+
     {% else %}
+      <!-- false case If no data -->
       <p>No restaurants found.</p>
     {% endif %}
   </div>
+
+  <!--  Bootstrap JS (required for carousel functionality) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
